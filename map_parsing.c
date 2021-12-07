@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:46:38 by opassin           #+#    #+#             */
-/*   Updated: 2021/11/27 16:47:41 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/07 17:07:55 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,57 @@ int	ft_check_open(char *file)
 	return (SUCCESS);
 }
 
-int ft_get_nb_line(char *s)
-{//get number of line non-empty in the file
-	str = malloc(s);
-	if (!str)
-			return (NULL);
-	
+int ft_get_nb_line(char *s, t_lines *lines)
+{
+	char *line;
+	int fd;
+
+	fd = open(s, O_RDONLY);
+	while(line = get_next_line(fd) != NULL)
+	{
+			++lines.nb_line;
+			free(line);
+	}
+	close(fd);	
+}
+
+int	ft_get_max_length(char *s, t_lines *lines)
+{
+	char *line;
+	int 	fd;
+	int		i;
+
+	fd = open(s, O_RDONLY);
+	while((line = get_next_line(fd)) != NULL)
+	{
+		i = -1;
+		while(line[++i])
+				if (i > lines.max_length)
+						lines.max_length = i;
+		free(line);
+	}
+	close(fd);
+}
+
+void	ft_fill_map_tab(char *s, t_lines *lines, char **tab);
+{
+	char *line;
+	int 	fd;
+	int		i;
+
+	fd = open(s, O_RDONLY);
+	while((line = get_next_line(fd)) != NULL)
+	{
+		i = -1;
+		while (++i < lines.nb_line)
+    	{
+			j = -1;
+			while (++j < lines.max_length)
+				tab[i][j] = lines[j];
+		}
+		free(line);
+	}
+	close(fd);
 }
 
 int	main(int ac, char **av)

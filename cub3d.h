@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 13:13:27 by opassin           #+#    #+#             */
-/*   Updated: 2021/11/27 16:01:36 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/07 17:07:26 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef	struct s_id
 	int total;
 }	t_id;
 
+typedef	struct s_lines
+{
+	int	nb_line;
+	int	max_length;
+}	t_lines;
+
 void    ft_init_id(t_id *id);
 int		ft_path_error(void);
 int		ft_path_error(void);
@@ -49,5 +55,9 @@ char	*ft_strjoin(char *s1, char *s2, int nl);
 void	*ft_memcpy(void *s1, char *s2, int len);
 long	ft_read(int fd, char *buff);
 char	*get_next_line(int fd);
+int ft_get_max_length(char *s, t_lines *lines);
+int ft_get_nb_line(char *s, t_lines *lines);
+char **init_map_tab(t_lines *lines);
+void    ft_fill_map_tab(char *s, t_lines *lines, char **tab);
 
 #endif
