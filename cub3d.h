@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 13:13:27 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/07 17:07:26 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/08 18:08:23 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ typedef	struct s_lines
 }	t_lines;
 
 void    ft_init_id(t_id *id);
+void    ft_init_lines(t_lines *lines);
 int		ft_path_error(void);
-int		ft_path_error(void);
+int		ft_arg_error(void);
 void	ft_open_error(void);
-int		ft_check_path(char *path)
-int 	ft_check_open(char *file)
+int		ft_check_path(char *path);
+int 	ft_check_open(char *file);
+int 	path_texture(char *path);
 int		ft_strlen(char *s);
 char	*ft_strdup(char *s);
 char	*ft_strchr(char *s, char c);
@@ -55,9 +57,10 @@ char	*ft_strjoin(char *s1, char *s2, int nl);
 void	*ft_memcpy(void *s1, char *s2, int len);
 long	ft_read(int fd, char *buff);
 char	*get_next_line(int fd);
-int ft_get_max_length(char *s, t_lines *lines);
-int ft_get_nb_line(char *s, t_lines *lines);
-char **init_map_tab(t_lines *lines);
+int		ft_get_max_length(char *s, t_lines *lines);
+int		ft_get_nb_line(char *s, t_lines *lines);
+char	**init_map_tab(t_lines *lines);
 void    ft_fill_map_tab(char *s, t_lines *lines, char **tab);
+void	display_matrix(char **tab, t_lines *lines);
 
 #endif

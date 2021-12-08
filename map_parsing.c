@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:46:38 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/07 17:07:55 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/08 20:14:27 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,36 @@
 
 int check_texture(char *s, t_id *id)
 {
-		if (s[0] == 'N' && s[1] == 'O' && id.no == 0)
+		if (s[0] == 'N' && s[1] == 'O' && id->no == 0)
 		{
-			id.no = 1;
-			if (if *(s + 3) == '.' && path_texture(s + 3) == SUCCESS)
-				id.no_path = 1;
+			id->no = 1;
+			if (*(s + 3) == '.' && (path_texture(s + 3) == SUCCESS))
+				id->no_path = 1;
 		}
-		else if (s[0] == 'S' && s[1] == 'O' && id.so == 0)
+		else if (s[0] == 'S' && s[1] == 'O' && id->so == 0)
 		{
-			id.so = 1;
-			if (if *(s + 3) == '.' && path_texture(s + 3) == SUCCESS)
-				id.so_path = 1;
+			id->so = 1;
+			if (*(s + 3) == '.' && (path_texture(s + 3) == SUCCESS))
+				id->so_path = 1;
 		}
-		else if (s[0] == 'W' && s[1] == 'E' && id.we == 0)
+		else if (s[0] == 'W' && s[1] == 'E' && id->we == 0)
 		{
-				id.we = 1;
-			if (if *(s + 3) == '.' && path_texture(s + 3) == SUCCESS)
-				id.we_path = 1;
+				id->we = 1;
+			if (*(s + 3) == '.' && (path_texture(s + 3) == SUCCESS))
+				id->we_path = 1;
 		}
-		else if (s[0] == 'E' && s[1] == 'A' && id.we == 0)
+		else if (s[0] == 'E' && s[1] == 'A' && id->we == 0)
 		{
-				id.ea = 1;
-			if (if *(s + 3) == '.' && path_texture(s + 3) == SUCCESS)
-				id.ea_path = 1;
+				id->ea = 1;
+			if (*(s + 3) == '.' && (path_texture(s + 3) == SUCCESS))
+				id->ea_path = 1;
 		}
 		else
 				return (FAIL);
-		return (SUCCES);
+		return (SUCCESS);
 }
 
-int	path_texture(char *s)
+int	path_texture(char *path)
 {
 	if (ft_check_open(path) == FAIL)
 		return (FAIL);
@@ -70,12 +70,13 @@ int	ft_check_open(char *file)
 {
 	int fd;
 
-	fd = open(path, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (!file)
 	{
 		ft_open_error();
 		return (FAIL);
 	}
+	close(fd);
 	return (SUCCESS);
 }
 
@@ -85,12 +86,13 @@ int ft_get_nb_line(char *s, t_lines *lines)
 	int fd;
 
 	fd = open(s, O_RDONLY);
-	while(line = get_next_line(fd) != NULL)
+	while((line = get_next_line(fd)) != NULL)
 	{
-			++lines.nb_line;
+			++lines->nb_line;
 			free(line);
 	}
-	close(fd);	
+	close(fd);
+	return (SUCCESS);	
 }
 
 int	ft_get_max_length(char *s, t_lines *lines)
@@ -104,40 +106,32 @@ int	ft_get_max_length(char *s, t_lines *lines)
 	{
 		i = -1;
 		while(line[++i])
-				if (i > lines.max_length)
-						lines.max_length = i;
+			if (i > lines->max_length)
+					lines->max_length = i;
 		free(line);
 	}
 	close(fd);
+	return (SUCCESS);	
 }
 
-void	ft_fill_map_tab(char *s, t_lines *lines, char **tab);
+void	ft_fill_map_tab(char *s, t_lines *lines, char **tab)
 {
 	char *line;
 	int 	fd;
 	int		i;
+	int		j;
 
 	fd = open(s, O_RDONLY);
 	while((line = get_next_line(fd)) != NULL)
 	{
 		i = -1;
-		while (++i < lines.nb_line)
+		while (++i < lines->nb_line)
     	{
 			j = -1;
-			while (++j < lines.max_length)
-				tab[i][j] = lines[j];
+			while (++j < lines->max_length)
+				tab[i][j] = line[j];
 		}
 		free(line);
 	}
 	close(fd);
-}
-
-int	main(int ac, char **av)
-{
-		if (ac != 2)
-				return (ft_arg_error());
-		if (ft_check_path(av[1]) == FAIL)
-				return (ft_path_error());
-		printf ("good path : %s\n", av[1]);
-		return (SUCCESS);
 }
