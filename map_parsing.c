@@ -6,11 +6,12 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:46:38 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/08 20:14:27 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/09 14:49:25 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "get_next_line.h"
 
 int check_texture(char *s, t_id *id)
 {
@@ -80,32 +81,18 @@ int	ft_check_open(char *file)
 	return (SUCCESS);
 }
 
-int ft_get_nb_line(char *s, t_lines *lines)
-{
-	char *line;
-	int fd;
-
-	fd = open(s, O_RDONLY);
-	while((line = get_next_line(fd)) != NULL)
-	{
-			++lines->nb_line;
-			free(line);
-	}
-	close(fd);
-	return (SUCCESS);	
-}
-
-int	ft_get_max_length(char *s, t_lines *lines)
+int	ft_get_line info(char *s, t_lines *lines)
 {
 	char *line;
 	int 	fd;
 	int		i;
 
 	fd = open(s, O_RDONLY);
-	while((line = get_next_line(fd)) != NULL)
+	while(get_next_line(fd, &line))
 	{
-		i = -1;
-		while(line[++i])
+		i = 0;
+		++lines->nb_line;
+		while(line[(++i) - 1])
 			if (i > lines->max_length)
 					lines->max_length = i;
 		free(line);
@@ -121,16 +108,14 @@ void	ft_fill_map_tab(char *s, t_lines *lines, char **tab)
 	int		i;
 	int		j;
 
+	i = -1;
 	fd = open(s, O_RDONLY);
-	while((line = get_next_line(fd)) != NULL)
+	while(get_next_line(fd, &line))
 	{
-		i = -1;
-		while (++i < lines->nb_line)
-    	{
-			j = -1;
-			while (++j < lines->max_length)
-				tab[i][j] = line[j];
-		}
+		++i;
+		j = -1;
+		while (++j < lines->max_length)
+			tab[i][j] = line[j];
 		free(line);
 	}
 	close(fd);
