@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 13:13:27 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/09 14:51:11 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/11 20:19:36 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int		ft_get_line_info(char *s, t_lines *lines);
 char	**init_map_tab(t_lines *lines);
 void    ft_fill_map_tab(char *s, t_lines *lines, char **tab);
 void	display_matrix(char **tab, t_lines *lines);
+void	free_matrix(char **tab, t_lines *lines);
 
 #endif

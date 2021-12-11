@@ -6,13 +6,13 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 12:40:00 by opassin           #+#    #+#             */
-/*   Updated: 2021/09/16 01:40:29 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/11 18:50:06 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	int	i;
 
@@ -62,15 +62,15 @@ char	*ft_strfreejoin(char *s1, char *s2, int out)
 	return (str);
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(char *src)
 {
 	char	*tmp;
 	size_t	i;
 
 	i = 0;
-	tmp = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	tmp = malloc(ft_strlen(src) + 1);
 	if (!tmp)
-		return (tmp);
+		return (NULL);
 	while (i < ft_strlen(src))
 	{
 		tmp[i] = src[i];
@@ -80,7 +80,7 @@ char	*ft_strdup(const char *src)
 	return (tmp);
 }
 
-char	*ft_strndup(const char *src, size_t n)
+char	*ft_strndup(char *src, size_t n)
 {
 	char	*tmp;
 	size_t	i;
@@ -88,7 +88,7 @@ char	*ft_strndup(const char *src, size_t n)
 	i = 0;
 	tmp = malloc(sizeof(char) * (n + 1));
 	if (!tmp)
-		return (tmp);
+		return (NULL);
 	while (i < n)
 	{
 		tmp[i] = src[i];

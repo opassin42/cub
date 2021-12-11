@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:58:08 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/08 17:56:35 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/11 20:18:52 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ char **init_map_tab(t_lines *lines)
 	int		i;
 	int		j;
    
-	i = -1;
-	tab = malloc(lines->nb_line);
-	while (++i < lines->nb_line)
-		tab[i] = malloc(lines->max_length);
-	i = -1;
-	while (++i < lines->nb_line)
+	i = 0;
+	tab = malloc(sizeof(char*) * lines->nb_line);
+	while (++i <= lines->nb_line)
+		tab[i - 1] = malloc(lines->max_length);
+	i = 0;
+	while (++i <= lines->nb_line)
 	{
-		j = -1;
-		while (++j < lines->max_length)
-				tab[i][j] = 0;
+		j = 0;
+		while (++j <= lines->max_length)
+				tab[i - 1][j - 1] = 0;
 	}
 	return (tab);
 }

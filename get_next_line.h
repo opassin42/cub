@@ -6,7 +6,7 @@
 /*   By: opassin <opassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 15:11:12 by opassin           #+#    #+#             */
-/*   Updated: 2021/09/16 05:42:25 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/11 18:47:58 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef struct s_line
 	size_t	size;
 }	t_line;
 
-size_t			ft_strlen(const char *src);
+size_t			ft_strlen(char *src);
 char			*ft_strfreejoin(char *s1, char *s2, int out);
-char			*ft_strdup(const char *src);
-char			*ft_strndup(const char *src, size_t n);
+char			*ft_strdup(char *src);
+char			*ft_strndup(char *src, size_t n);
 int				get_next_line(int fd, char **line);
 char			*freenull(char *s, char *new_s);
 int				ft_tmp(char *s, char **line);

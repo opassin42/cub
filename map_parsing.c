@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:46:38 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/09 14:49:25 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/11 20:01:59 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_check_open(char *file)
 	return (SUCCESS);
 }
 
-int	ft_get_line info(char *s, t_lines *lines)
+int	ft_get_line_info(char *s, t_lines *lines)
 {
 	char *line;
 	int 	fd;
@@ -97,6 +97,7 @@ int	ft_get_line info(char *s, t_lines *lines)
 					lines->max_length = i;
 		free(line);
 	}
+	free(line);
 	close(fd);
 	return (SUCCESS);	
 }
@@ -108,15 +109,16 @@ void	ft_fill_map_tab(char *s, t_lines *lines, char **tab)
 	int		i;
 	int		j;
 
-	i = -1;
+	i = 0;
 	fd = open(s, O_RDONLY);
 	while(get_next_line(fd, &line))
 	{
 		++i;
-		j = -1;
-		while (++j < lines->max_length)
-			tab[i][j] = line[j];
+		j = 0;
+		while (++j <= lines->max_length)
+			tab[i - 1][j - 1] = line[j - 1];
 		free(line);
 	}
+	free(line);
 	close(fd);
 }
