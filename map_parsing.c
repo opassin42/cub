@@ -6,12 +6,77 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:46:38 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/11 20:01:59 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/16 18:17:23 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "get_next_line.h"
+
+int	is_empty_line(char *s)
+{
+		int	empty;
+
+		empty = 1;
+		if (*s == 0)
+				return (empty);
+		else
+		{
+			while (*s)
+			{
+				if (*s == ' ')
+					empty = 1;
+				else
+				{
+					empty = 0;
+					return (empty);
+				}
+				s++;
+			}
+		}
+		return (empty);
+}
+
+int	map_start(char *s, t_map *map)
+{
+	if (!is_empty_line (s) && !map.start)
+	{
+		while (*s)
+		{
+			if (*s != '1' && *s != ' ')
+			{
+				map.is_correct = 0;
+				return (FAIL);
+			}
+			s++;
+		}
+		map.start = 1;
+		return (SUCCESS);		
+	}
+}
+
+int map_middle(char *s, t_map *map)
+{
+
+}
+
+int	map_end(char *s, t_map *map)
+{
+	if (!is_empty_line (s) && !map.end)
+	{
+		while (*s)
+		{
+			if (*s != '1' && *s != ' ')
+			{
+				map.is_correct = 0;
+				return (FAIL);
+			}
+		}
+		s++;
+		map.end = 1;
+		return (SUCCESS);		
+	}
+}
 
 int check_texture(char *s, t_id *id)
 {

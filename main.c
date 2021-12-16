@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:48:43 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/11 20:08:35 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/16 18:17:28 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int ac, char **av)
 		tab = init_map_tab(&lines);
 		ft_fill_map_tab(av[1], &lines, tab);
 		display_matrix(tab, &lines);
-		printf("%lu", ft_strlen(tab[3]));
 		free_matrix(tab, &lines);
 		return (ret);
 }

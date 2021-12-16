@@ -6,7 +6,7 @@
 /*   By: opassin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 13:13:27 by opassin           #+#    #+#             */
-/*   Updated: 2021/12/11 20:19:36 by opassin          ###   ########.fr       */
+/*   Updated: 2021/12/16 18:17:25 by opassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
+
+
+//need initialization
+typedef	struct s_map
+{
+	int	start;
+	int is_correct;
+	char player;
+	int end;
+}	t_map;
+
 
 typedef	struct s_id
 {
